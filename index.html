@@ -14,8 +14,8 @@
 
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
+            background-color: #111;
+            color: #fff;
             line-height: 1.6;
             transition: background-color 0.3s;
         }
@@ -32,11 +32,12 @@
             padding: 20px 0;
             text-align: center;
             width: 100%;
-            border-radius: 0 0 50% 50%;
+            border-radius: 0 0 20px 20px;
             position: fixed;
             top: 0;
             left: 0;
             z-index: 999;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
 
         .logo {
@@ -153,75 +154,6 @@
             cursor: pointer;
         }
 
-        /* Dark mode / light mode switcher */
-        #mode-switcher {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background-color: transparent;
-            border: 2px solid #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            z-index: 999;
-            animation: rotate 10s linear infinite;
-        }
-
-        #mode-switcher .sun {
-            width: 20px;
-            height: 20px;
-            background-color: #ffc107;
-            border-radius: 50%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            animation: moveSun 10s linear infinite;
-        }
-
-        #mode-switcher .moon {
-            width: 20px;
-            height: 20px;
-            background-color: #f4f4f4;
-            border-radius: 50%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            animation: moveMoon 10s linear infinite;
-        }
-
-        @keyframes rotate {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        @keyframes moveSun {
-            0% {
-                transform: translate(-50%, -50%) rotate(0deg) translateX(80px);
-            }
-            100% {
-                transform: translate(-50%, -50%) rotate(360deg) translateX(80px);
-            }
-        }
-
-        @keyframes moveMoon {
-            0% {
-                transform: translate(-50%, -50%) rotate(0deg) translateX(-80px);
-            }
-            100% {
-                transform: translate(-50%, -50%) rotate(360deg) translateX(-80px);
-            }
-        }
-
         /* Media queries */
         @media (max-width: 768px) {
             .container {
@@ -296,10 +228,6 @@
 
     <footer>
         <div class="container footer-content">
-            <div id="mode-switcher" onclick="toggleDarkMode()">
-                <div class="sun"></div>
-                <div class="moon"></div>
-            </div>
             <p>&copy; 2024 12x Studios. All rights reserved.</p>
         </div>
     </footer>
@@ -315,18 +243,6 @@
     </div>
 
     <script>
-        let isDarkMode = false;
-
-        function toggleDarkMode() {
-            isDarkMode = !isDarkMode;
-            const body = document.body;
-            if (isDarkMode) {
-                body.classList.add('dark-mode');
-            } else {
-                body.classList.remove('dark-mode');
-            }
-        }
-
         document.getElementById("contact-form").addEventListener("submit", function(event) {
             event.preventDefault();
             var form = event.target;
