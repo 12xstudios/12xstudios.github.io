@@ -17,10 +17,16 @@
             background-color: #f4f4f4;
             color: #333;
             line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+            transition: background-color 0.3s;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 600px;
             margin: 0 auto;
             padding: 0 20px;
         }
@@ -29,6 +35,8 @@
             background-color: #333;
             color: #fff;
             padding: 20px 0;
+            text-align: center;
+            width: 100%;
         }
 
         .logo {
@@ -56,6 +64,7 @@
 
         section {
             padding: 60px 0;
+            text-align: center;
         }
 
         .btn {
@@ -77,7 +86,7 @@
             color: #fff;
             text-align: center;
             padding: 20px 0;
-            position: relative;
+            width: 100%;
         }
 
         .footer-overlay {
@@ -95,18 +104,22 @@
             z-index: 1;
         }
 
-        .footer-links {
+        .social-media-icons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             margin-bottom: 20px;
         }
 
-        .footer-links a {
-            color: #fff;
-            text-decoration: none;
+        .social-media-icons a {
             margin: 0 10px;
+            color: #fff;
+            font-size: 24px;
+            text-decoration: none;
             transition: color 0.3s;
         }
 
-        .footer-links a:hover {
+        .social-media-icons a:hover {
             color: #f0f0f0;
         }
 
@@ -150,6 +163,75 @@
             cursor: pointer;
         }
 
+        /* Dark mode / light mode switcher */
+        #mode-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: transparent;
+            border: 2px solid #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 999;
+            animation: rotate 10s linear infinite;
+        }
+
+        #mode-switcher .sun {
+            width: 20px;
+            height: 20px;
+            background-color: #ffc107;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: moveSun 10s linear infinite;
+        }
+
+        #mode-switcher .moon {
+            width: 20px;
+            height: 20px;
+            background-color: #f4f4f4;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: moveMoon 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes moveSun {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg) translateX(80px);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg) translateX(80px);
+            }
+        }
+
+        @keyframes moveMoon {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg) translateX(-80px);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg) translateX(-80px);
+            }
+        }
+
         /* Media queries */
         @media (max-width: 768px) {
             .container {
@@ -168,6 +250,7 @@
             <h1 class="logo">12x Studios</h1>
             <nav>
                 <ul>
+                    <li><a href="#">Home</a></li>
                     <li><a href="#about">About Us</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#portfolio">Portfolio</a></li>
@@ -181,7 +264,7 @@
         <div class="container">
             <h2>Welcome to 12x Studios</h2>
             <p>We create stunning designs that captivate your audience.</p>
-            <a href="#portfolio" class="btn">View Our Work</a>
+            <a href="#contact" class="btn">Contact Us</a>
         </div>
     </section>
 
@@ -210,9 +293,12 @@
         <div class="container">
             <h2>Contact Us</h2>
             <form id="contact-form" method="post" action="https://formspree.io/f/your-formspree-email">
-                <input type="text" name="name" placeholder="Your Name" required>
-                <input type="email" name="_replyto" placeholder="Your Email" required>
-                <textarea name="message" placeholder="Your Message" required></textarea>
+                <input type="text" name="name" placeholder="Your Name" style="width: 100%; margin-bottom: 10px; padding: 10px;">
+                <br>
+                <input type="email" name="_replyto" placeholder="Your Email" style="width: 100%; margin-bottom: 10px; padding: 10px;">
+                <br>
+                <textarea name="message" placeholder="Your Message" style="width: 100%; margin-bottom: 10px; padding: 10px;"></textarea>
+                <br>
                 <button type="submit" class="btn">Send Message</button>
             </form>
         </div>
@@ -221,12 +307,11 @@
     <footer>
         <div class="footer-overlay"></div>
         <div class="container footer-content">
-            <div class="footer-links">
-                <a href="#">Home</a>
-                <a href="#about">About Us</a>
-                <a href="#services">Services</a>
-                <a href="#portfolio">Portfolio</a>
-                <a href="#contact">Contact</a>
+            <div class="social-media-icons">
+                <a href="#" class="fa fa-facebook"></a>
+                <a href="#" class="fa fa-twitter"></a>
+                <a href="#" class="fa fa-instagram"></a>
+                <a href="#" class="fa fa-linkedin"></a>
             </div>
             <p>&copy; 2024 12x Studios. All rights reserved.</p>
         </div>
@@ -243,14 +328,16 @@
     </div>
 
     <script>
-        function toggleDarkMode() {
-            document.body.classList.add('dark-mode');
-            document.body.classList.remove('light-mode');
-        }
+        let isDarkMode = false;
 
-        function toggleLightMode() {
-            document.body.classList.add('light-mode');
-            document.body.classList.remove('dark-mode');
+        function toggleDarkMode() {
+            isDarkMode = !isDarkMode;
+            const body = document.body;
+            if (isDarkMode) {
+                body.classList.add('dark-mode');
+            } else {
+                body.classList.remove('dark-mode');
+            }
         }
 
         document.getElementById("contact-form").addEventListener("submit", function(event) {
@@ -282,3 +369,4 @@
     </script>
 </body>
 </html>
+
