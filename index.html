@@ -5,12 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>12x Studios</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        /* Reset and general styles */
+        body, h1, h2, h3, p, ul, li, button, input, textarea {
             margin: 0;
             padding: 0;
-            background-color: #222;
-            color: #fff;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
         }
 
         .container {
@@ -25,38 +31,31 @@
             padding: 20px 0;
         }
 
-        header .logo {
-            font-size: 24px;
-            margin: 0;
+        .logo {
+            font-size: 2rem;
         }
 
-        header nav ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
+        nav ul {
+            list-style: none;
         }
 
-        header nav ul li {
+        nav ul li {
             display: inline;
             margin-right: 20px;
         }
 
-        header nav ul li a {
+        nav ul li a {
             color: #fff;
             text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #f0f0f0;
         }
 
         section {
             padding: 60px 0;
-        }
-
-        #hero {
-            background-color: #333;
-            text-align: center;
-        }
-
-        #hero h2 {
-            margin-bottom: 20px;
         }
 
         .btn {
@@ -66,54 +65,56 @@
             padding: 10px 20px;
             text-decoration: none;
             border-radius: 5px;
+            transition: background-color 0.3s;
         }
 
-        #about,
-        #services,
-        #portfolio,
-        #contact {
+        .btn:hover {
             background-color: #444;
-            text-align: center;
         }
 
         footer {
-            background-color: #333;
+            background-color: #222;
             color: #fff;
             text-align: center;
             padding: 20px 0;
+            position: relative;
         }
 
-        .theme-toggle {
-            float: right;
-        }
-
-        .theme-toggle button {
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-        }
-
-        #contact-form input,
-        #contact-form textarea,
-        #contact-form button {
-            margin: 10px 0;
+        .footer-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%);
+            z-index: -1;
         }
 
-        #contact-form button {
-            background-color: #333;
+        .footer-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-links {
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
             color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #f0f0f0;
         }
 
         #info-button {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: #333;
+            background-color: #333;
             color: #fff;
             border: none;
             border-radius: 50%;
@@ -121,6 +122,43 @@
             height: 50px;
             font-size: 24px;
             cursor: pointer;
+            z-index: 999;
+        }
+
+        .info-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            z-index: 9999;
+        }
+
+        .info-popup-content {
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Media queries */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 10px;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
@@ -136,10 +174,6 @@
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
-            <div class="theme-toggle">
-                <button class="dark-mode-btn" onclick="toggleDarkMode()">🌙</button>
-                <button class="light-mode-btn" onclick="toggleLightMode()">☀️</button>
-            </div>
         </div>
     </header>
 
@@ -154,21 +188,21 @@
     <section id="about">
         <div class="container">
             <h2>About Us</h2>
-            <p>Under Development</p>
+            <p>Insert your about content here...</p>
         </div>
     </section>
 
     <section id="services">
         <div class="container">
             <h2>Our Services</h2>
-            <p>Under Development</p>
+            <p>Insert your services content here...</p>
         </div>
     </section>
 
     <section id="portfolio">
         <div class="container">
             <h2>Portfolio</h2>
-            <p>Under Development</p>
+            <p>Insert your portfolio content here...</p>
         </div>
     </section>
 
@@ -185,12 +219,28 @@
     </section>
 
     <footer>
-        <div class="container">
+        <div class="footer-overlay"></div>
+        <div class="container footer-content">
+            <div class="footer-links">
+                <a href="#">Home</a>
+                <a href="#about">About Us</a>
+                <a href="#services">Services</a>
+                <a href="#portfolio">Portfolio</a>
+                <a href="#contact">Contact</a>
+            </div>
             <p>&copy; 2024 12x Studios. All rights reserved.</p>
         </div>
     </footer>
 
     <button id="info-button" onclick="showInfo()">ℹ️</button>
+
+    <div id="info-popup" class="info-popup">
+        <div class="info-popup-content">
+            <span class="close-btn" onclick="closeInfo()">×</span>
+            <h2>About 12x Studios</h2>
+            <p>Insert your information here...</p>
+        </div>
+    </div>
 
     <script>
         function toggleDarkMode() {
@@ -223,7 +273,11 @@
         });
 
         function showInfo() {
-            alert("Information about 12x Studios.");
+            document.getElementById("info-popup").style.display = "block";
+        }
+
+        function closeInfo() {
+            document.getElementById("info-popup").style.display = "none";
         }
     </script>
 </body>
